@@ -1,0 +1,33 @@
+package com.prjcandyhouse;
+
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.app.Notification;
+import android.app.NotificationManager;
+
+public class NotifyService extends Service{
+	//inner variables
+	final static String ACTION="";
+	final static String STOP_SERVICE="";
+	final static int RQS_STOP_SERVICE=0x1;
+	final static int RQS_SEND_NOTIFICATION_1=0x2;
+	final static int RQS_SEND_NOTIFICATION_2=0x3;
+	
+	private static final int MY_NOTIFICATION_ID_1=0x1;
+	private static final int MY_NOTIFICATION_ID_2=0x2;
+	private NotificationManager notificationManager=null;
+	private Notification myNotification=null;
+	
+	Context myContext;
+	String myNotificationTitle="Notification Sample";
+	
+	NotifyserviceReceiver notifyServeiceReceiver;
+
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
