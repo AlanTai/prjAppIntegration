@@ -1,12 +1,8 @@
 package com.prjcandyhouse;
 
-import com.google.android.gcm.GCMRegistrar;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,16 +29,6 @@ public class MainActivity extends Activity {
         
         //
         initXMLComponents();
-        
-        //
-        Intent intent = new Intent(MainActivity.this, NotifyService.class);
-        this.startService(intent);
-        
-        //
-        gcmFilter = new IntentFilter();
-        gcmFilter.addAction("GCM_RECEIVED_ACTION");
-        
-        registerClient();
     }
 
 
@@ -75,29 +61,7 @@ public class MainActivity extends Activity {
 	};
 	
 	private void registerClient(){
-		try{
-			GCMRegistrar.checkDevice(this);
-			GCMRegistrar.checkManifest(this);
-			regId = GCMRegistrar.getRegistrationId(this);
-			
-			if(regId.equals("")){
-				registrationStatus = "Registering...";
-				
-				GCMRegistrar.register(this, PROJECT_ID);
-				regId = GCMRegistrar.getRegistrationId(this);
-				registrationStatus = "Registration Acquired";
-			}
-			else{
-				registrationStatus = "Already Registered!";
-			}
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-			registrationStatus = ex.getMessage();
-		}
 		
-		tvRegStatusResult.setText(registrationStatus);
-		Log.d(TAG, regId);
 	}
 	
 	private void sendPrivateIdToServer(final String strId){
