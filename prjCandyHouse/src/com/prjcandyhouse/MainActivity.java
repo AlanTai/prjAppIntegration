@@ -1,12 +1,27 @@
 package com.prjcandyhouse;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
+	// inner variables
+	private static final String PROJECT_ID = "701006689919";
+	private static final String TAG = "MainActivity";
+	private String regId = "";
+	
+	private String registrationStatus = "Not yet registered";
+	private String broadcastMessage = "No broadcast message";
+	
+	IntentFilter gcmFilter;
+	TextView tvRegStatusResult;
+	TextView tvBroadcastMessage;
+	Button btnSubmitRegId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

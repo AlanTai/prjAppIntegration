@@ -48,6 +48,7 @@ public class GCMIntentService extends GCMBaseIntentService{
 		broadcsatIntent.setAction("GCM_RECEIVED_ACTION");
 		broadcsatIntent.putExtra("gcm", message);
 		
+		// send broadcast
 		ctx.sendBroadcast(broadcsatIntent);
 	}
 
