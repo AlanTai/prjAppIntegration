@@ -2,6 +2,7 @@ package com.prjcandyhouse;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.BoringLayout;
 import android.util.Log;
 
 import com.google.android.gcm.GCMBaseIntentService;
@@ -37,9 +38,9 @@ public class GCMIntentService extends GCMBaseIntentService{
 	}
 
 	@Override
-	protected void onUnregistered(Context ctx, String regId) {
+	protected void onUnregistered(Context arg0, String arg1) {
 		// TODO Auto-generated method stub
-		Log.d(TAG, regId);
+		
 	}
 	
 	//
