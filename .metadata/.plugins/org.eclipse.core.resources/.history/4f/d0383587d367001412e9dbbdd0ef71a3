@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">appCandyHouse</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    
+    <string name="registryStatus">Registry Status:</string>
+    <string name="registryStatusResult">Not Registered</string>
+    <string name="broadcastLabel">Broadcast Message:</string>
+    <string name="broadcastResult">No broadcast message yet</string>
+    <string name="btnSubmitRegId">Submit Registered ID</string>
+
+</resources>

@@ -1,0 +1,53 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvRegStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/registryStatus" />
+    
+    <TextView 
+        android:id="@+id/tvRegStatusResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/registryStatusResult"/>
+    
+    <TextView 
+        android:id="@+id/tvMessageLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/broadcastLabel"/>
+    
+    <TextView 
+        android:id="@+id/tvMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/broadcastResult"/>
+    
+    <Button 
+        android:id="@+id/btnSubmitRegId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnSubmitRegId"/>
+    
+    <TextView 
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="#000"
+        android:padding="2dp"/>
+    
+    <TextView
+        android:id="@+id/txtBluetoothStatus"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+</LinearLayout>

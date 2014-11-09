@@ -10,5 +10,11 @@
     <string name="broadcastLabel">Broadcast Message:</string>
     <string name="broadcastResult">No broadcast message yet</string>
     <string name="btnSubmitRegId">Submit Registered ID</string>
+    
+    <string name="txtBluetoothStatus">Blue Tooth Status</string>
+    <string name="btnTurnOn">Turn On</string>
+    <string name="btnTurnOff">Turn Off</string>
+    <string name="pairedList">Paired List</string>
+    <string name="findDevices">Search/Cancel</string>
 
 </resources>
