@@ -10,6 +10,7 @@ import java.util.Set;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -103,7 +104,7 @@ public class MainActivity extends Activity {
 		if(!myBluetoothAdapter.isEnabled()){
 			Intent turnOIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 			startActivityForResult(turnOIntent, REQUEST_ENABLE_BT);
-			Toast.makeText(getApplicationContext(), "Bluetooth is turned on", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Bluetooth is ready for turning on", Toast.LENGTH_LONG).show();
 		}else{
 			Toast.makeText(getApplicationContext(), "Bluetooth is already on", Toast.LENGTH_LONG).show();
 		}
@@ -126,12 +127,31 @@ public class MainActivity extends Activity {
 		}
 	}
 	
+	private void list(View arg_view){
+		pairedDevices = myBluetoothAdapter.getBondedDevices();
+		
+		//
+		for (BluetoothDevice device : pairedDevices){
+			BTArrayAdapter.add(device.getName() + "\n" + device.getAddress());
+		}
+	}
+	
 	private final BroadcastReceiver bReceiver = new BroadcastReceiver() {
 		
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			// TODO Auto-generated method stub
 			String action = intent.getAction();
+			
+			//
+			if(BluetoothDevice.ACTION_FOUND.equals(action)){
+				//
+				BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+				
+				//
+				BTArrayAdapter.add(device.getName() + "" + device.getAddress());
+				BTArrayAdapter.notifyDataSetChanged();
+			}
 		}
 	};
 	
@@ -165,11 +185,23 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+
+        // view initialization
+        initGCMXMLComponents();
+        
+        /* intent from notification */
+        Intent latestIntent = this.getIntent();
+        if (latestIntent != null){
+            Bundle extras = latestIntent.getExtras();
+        	if (extras != null && extras.containsKey("NotificationMessage")){
+        		String msg = extras.getString("NotificationMessage");
+    			tvBroadcastMessage.setText(msg);
+        	}
+        }
+        
         // bluetooth
         initInnerVariables();
         
-        // view initialization
-        initGCMXMLComponents();
         
         // notify service
         Intent intent = new Intent(MainActivity.this, NotifyService.class);
@@ -238,6 +270,10 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
+		//bluetooth
+		myBluetoothAdapter.disable();
+		
+		//GCM
 		GCMRegistrar.onDestroy(this);
 		super.onDestroy();
 	}
@@ -285,7 +321,7 @@ public class MainActivity extends Activity {
 				registrationStatus = "Registering...";
 				
 				GCMRegistrar.register(this, PROJECT_ID);
-				regId = GCMRegistrar.getRegistrationId(this);
+				// regId = GCMRegistrar.getRegistrationId(this);
 				registrationStatus = "Registration Acquired";
 			}
 			else{
@@ -319,6 +355,7 @@ public class MainActivity extends Activity {
 					List<NameValuePair> nameValuesPairs = new ArrayList<NameValuePair>();
 					nameValuesPairs.add(new BasicNameValuePair("userName", "alantai"));
 					nameValuesPairs.add(new BasicNameValuePair("registrationId", strId));
+					httpPost.setEntity(new UrlEncodedFormEntity(nameValuesPairs));
 					
 					//
 					HttpResponse response = httpClient.execute(httpPost);

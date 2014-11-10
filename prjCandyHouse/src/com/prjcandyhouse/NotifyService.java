@@ -98,10 +98,17 @@ public class NotifyService extends Service{
 	}
 	
 	//
-	private void sendNotification(int id, String myTarget){
-		String notificationTxt = myTarget;
-		Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myTarget));
-		PendingIntent pendingIntent = PendingIntent.getActivity(myContext, 0, myIntent, Intent.FLAG_ACTIVITY_NEW_TASK);
+	private void sendNotification(int id, String strGCMTxt){
+		String notificationTxt = strGCMTxt;
+		//Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myTarget));
+		Intent myIntent = new Intent(myContext, MainActivity.class);
+
+		// open activity from notification and pass message to activity
+		myIntent.putExtra("NotificationMessage", notificationTxt);
+		myIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+		// pending intent
+		PendingIntent pendingIntent = PendingIntent.getActivity(myContext, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		myNotification.setLatestEventInfo(myContext, myNotificationTitle, notificationTxt, pendingIntent);
 		//myNotification=new Notification.Builder(myContext).setContentTitle(myNotificationTitle).setContentText(notificatioTxt).setContentIntent(pendingIntent).build();
 		notificationManager.notify(id, myNotification);
