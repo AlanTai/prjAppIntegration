@@ -42,6 +42,7 @@ public class GCMIntentService extends GCMBaseIntentService{
 		Log.d(TAG, regId);
 	}
 	
+	//
 	private void sendGCMIntent(Context ctx, String message){
 		Intent broadcsatIntent = new Intent();
 		broadcsatIntent.setAction("GCM_RECEIVED_ACTION");

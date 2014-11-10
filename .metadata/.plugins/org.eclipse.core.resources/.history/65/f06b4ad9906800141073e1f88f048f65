@@ -52,7 +52,6 @@ public class NotifyService extends Service{
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
-		// intent
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(ACTION);
 		intentFilter.addAction("GCM_RECEIVED_ACTION");

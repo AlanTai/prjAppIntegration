@@ -414,7 +414,7 @@ public class MainActivity extends Activity {
 	private TextView tvRegStatusResult;
 	private TextView tvBroadcastMessage;
 	private Button btnSubmitRegId;
-	// initialization of GCM components
+	// initialization of components
 	private void initGCMXMLComponents(){
 		// GCM
 		tvRegStatusResult = (TextView) findViewById(R.id.tvRegStatusResult);

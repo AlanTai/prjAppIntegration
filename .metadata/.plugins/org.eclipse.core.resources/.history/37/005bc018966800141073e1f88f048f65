@@ -202,7 +202,8 @@ public class MainActivity extends Activity {
         // bluetooth
         initInnerVariables();
         
-        // notification service
+        
+        // notify service
         Intent intent = new Intent(MainActivity.this, NotifyService.class);
         this.startService(intent);
         
@@ -213,6 +214,7 @@ public class MainActivity extends Activity {
         // register user's device
         registerClient();
     }
+
 
     @Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -225,6 +227,7 @@ public class MainActivity extends Activity {
     		}
     	}
 	}
+
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -341,21 +344,21 @@ public class MainActivity extends Activity {
 				String strResponseCode = "";
 				InputStream inputStream = null;
 				try{
-					// http client
+					//
 					HttpClient httpClient = new DefaultHttpClient();
 					HttpPost httpPost = new HttpPost("http://gogistics.gogistics-tw.com/gcm_reg_id_handler");
 					
-					// list pair
+					//
 					List<NameValuePair> nameValuesPairs = new ArrayList<NameValuePair>();
 					nameValuesPairs.add(new BasicNameValuePair("userName", "alantai"));
 					nameValuesPairs.add(new BasicNameValuePair("registrationId", strId));
 					httpPost.setEntity(new UrlEncodedFormEntity(nameValuesPairs));
 					
-					// http response
+					//
 					HttpResponse response = httpClient.execute(httpPost);
 					inputStream = response.getEntity().getContent();
 					
-					// buffer reader
+					//
 					BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 					StringBuilder sb = new StringBuilder();
 					
@@ -392,7 +395,13 @@ public class MainActivity extends Activity {
 	private Button btnFind;
 	private TextView txtStatus;
 	private ListView myListView;
-	// initialization of bluetooth components
+	
+	//GCM
+	private TextView tvRegStatusResult;
+	private TextView tvBroadcastMessage;
+	private Button btnSubmitRegId;
+	
+	//
 	private void initBluetoothComponents(){
 
 		//Bluetooth
@@ -409,13 +418,8 @@ public class MainActivity extends Activity {
 		myListView= (ListView) findViewById(R.id.listView);
 	}
 	
-	
-	// GCM
-	private TextView tvRegStatusResult;
-	private TextView tvBroadcastMessage;
-	private Button btnSubmitRegId;
-	// initialization of GCM components
 	private void initGCMXMLComponents(){
+		
 		// GCM
 		tvRegStatusResult = (TextView) findViewById(R.id.tvRegStatusResult);
 		tvBroadcastMessage = (TextView) findViewById(R.id.tvMessage);

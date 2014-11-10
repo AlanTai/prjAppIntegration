@@ -392,7 +392,7 @@ public class MainActivity extends Activity {
 	private Button btnFind;
 	private TextView txtStatus;
 	private ListView myListView;
-	// initialization of bluetooth components
+	// bluetooth components
 	private void initBluetoothComponents(){
 
 		//Bluetooth
@@ -410,11 +410,11 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	// GCM
+	//GCM
 	private TextView tvRegStatusResult;
 	private TextView tvBroadcastMessage;
 	private Button btnSubmitRegId;
-	// initialization of GCM components
+	// 
 	private void initGCMXMLComponents(){
 		// GCM
 		tvRegStatusResult = (TextView) findViewById(R.id.tvRegStatusResult);

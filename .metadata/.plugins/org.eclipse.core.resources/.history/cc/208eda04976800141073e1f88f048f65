@@ -15,4 +15,5 @@ public class AutoStartNotifyReceiver extends BroadcastReceiver{
 			context.startService(myIntent);
 		}
 	}
+
 }
