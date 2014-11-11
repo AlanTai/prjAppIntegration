@@ -1,0 +1,26 @@
+package com.prjcandyhouse;
+
+public class XMPPConnectionTask extends AsyncTask<Void, Void, Void> {
+
+    @Override
+    protected Void doInBackground(Void... params) {
+          ConnectionConfiguration config = new ConnectionConfiguration( server_host, SERVER_PORT);
+          XMPPConnection m_connection = new XMPPConnection(config);
+    try {
+         SASLAuthentication.supportSASLMechanism("PLAIN");
+         config.setSASLAuthenticationEnabled(true);     
+         m_connection.connect();
+        Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.manual);
+    } catch (XMPPException e) {
+        e.printStackTrace();
+    } 
+
+        return null;
+    }
+
+    @Override
+    protected void onPostExecute(Void result) {
+
+    }
+
+}

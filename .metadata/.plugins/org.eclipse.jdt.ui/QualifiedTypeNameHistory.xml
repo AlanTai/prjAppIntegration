@@ -16,7 +16,6 @@
 <fullyQualifiedTypeName name="com.prjcandyhouse.MainActivity"/>
 <fullyQualifiedTypeName name="com.prjcandyhouse.NotifyService"/>
 <fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.os.AsyncTask"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="org.apache.http.client.HttpClient"/>
 <fullyQualifiedTypeName name="org.apache.http.impl.client.DefaultHttpClient"/>
@@ -45,4 +44,19 @@
 <fullyQualifiedTypeName name="android.content.BroadcastReceiver"/>
 <fullyQualifiedTypeName name="android.content.IntentFilter"/>
 <fullyQualifiedTypeName name="android.bluetooth.BluetoothDevice"/>
+<fullyQualifiedTypeName name="org.apache.http.client.entity.UrlEncodedFormEntity"/>
+<fullyQualifiedTypeName name="android.os.Bundle"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.ConnectionListener"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.SmackException"/>
+<fullyQualifiedTypeName name="java.util.Timer"/>
+<fullyQualifiedTypeName name="java.util.TimerTask"/>
+<fullyQualifiedTypeName name="android.os.AsyncTask"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.ConnectionConfiguration"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.XMPPConnection"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.tcp.XMPPTCPConnection"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.SASLAuthentication"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.Roster"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.XMPPException"/>
+<fullyQualifiedTypeName name="org.jivesoftware.smack.ConnectionConfiguration.SecurityMode"/>
 </qualifiedTypeNameHistroy>

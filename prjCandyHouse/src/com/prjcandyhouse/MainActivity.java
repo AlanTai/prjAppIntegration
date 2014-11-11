@@ -14,6 +14,12 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.SASLAuthentication;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 
 import com.google.android.gcm.GCMRegistrar;
 
@@ -39,6 +45,31 @@ import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
+	
+	// temp XMPP task
+	private class ConnectToXmpp extends AsyncTask<Void, Void, Void> {
+	    @Override
+	    protected Void doInBackground(Void... params) {
+	          ConnectionConfiguration config = new ConnectionConfiguration( "localhost", 0); // server address and port
+	          XMPPTCPConnection m_connection = new XMPPTCPConnection(config);
+	    try {
+	         SASLAuthentication.supportSASLMechanism("PLAIN");
+	         config.setSecurityMode(ConnectionConfiguration.SecurityMode.enabled);     
+	         m_connection.connect();
+	        Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.manual);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } 
+
+	        return null;
+	    }
+
+	    @Override
+	    protected void onPostExecute(Void result) {
+
+	    }
+
+	}
 	
 	// inner variables of Bluetooth
 	private static final int REQUEST_ENABLE_BT = 0x1;
