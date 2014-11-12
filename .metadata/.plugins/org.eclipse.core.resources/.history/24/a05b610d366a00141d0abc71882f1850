@@ -244,8 +244,8 @@ public class MainActivity extends Activity {
 						try {
 							myAccountManager.createAccount(userName, pwd);
 							
-							Log.i("Logging Log", "Logging in to Jabber as user: " + userName + " on connection: " + myXMPPConnection.toString());
-					        myXMPPConnection.login(userName, pwd);
+							log.info("Logging in to Jabber as user: " + userName + " on connection: " + myXMPPConnection.toString());
+					        connection.login(user, password);
 						} catch (XMPPException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -257,7 +257,6 @@ public class MainActivity extends Activity {
 				@Override
 				protected void onPostExecute(Void result) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Log in as allen wang", Toast.LENGTH_LONG).show();
 					super.onPostExecute(result);
 				}
 				

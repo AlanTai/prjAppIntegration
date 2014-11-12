@@ -226,45 +226,21 @@ public class MainActivity extends Activity {
 		}
 	};
 	
-	/*still under testing*/
 	OnClickListener clickListenerCreateAccount = new OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			new AsyncTask<Void, Void, Void>(){
-
-				@Override
-				protected Void doInBackground(Void... params) {
-					// TODO Auto-generated method stub
-					if(myXMPPConnection != null && myXMPPConnection.isConnected()){
-						AccountManager myAccountManager = new AccountManager(myXMPPConnection);
-						String userName = "allen wang";
-						String pwd = "regw45y45y";
-						try {
-							myAccountManager.createAccount(userName, pwd);
-							
-							Log.i("Logging Log", "Logging in to Jabber as user: " + userName + " on connection: " + myXMPPConnection.toString());
-					        myXMPPConnection.login(userName, pwd);
-						} catch (XMPPException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-					return null;
-				}
-
-				@Override
-				protected void onPostExecute(Void result) {
-					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Log in as allen wang", Toast.LENGTH_LONG).show();
-					super.onPostExecute(result);
-				}
+			if(myXMPPConnection != null && myXMPPConnection.isConnected()){
+				AccountManager myAccountManager = new AccountManager(myXMPPConnection);
 				
-				
-			
-			}.execute(null, null, null);
-			
+				try {
+					myAccountManager.createAccount("alantai", "alantai");
+				} catch (XMPPException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	};
 
