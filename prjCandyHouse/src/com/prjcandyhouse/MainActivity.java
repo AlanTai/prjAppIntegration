@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -15,11 +16,17 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.Roster;
-import org.jivesoftware.smack.SASLAuthentication;
+import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.tcp.XMPPTCPConnection;
+import org.jivesoftware.smack.filter.MessageTypeFilter;
+import org.jivesoftware.smack.filter.PacketFilter;
+import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.Packet;
+import org.jivesoftware.smack.packet.Presence;
+import org.jivesoftware.smack.util.StringUtils;
 
 import com.google.android.gcm.GCMRegistrar;
 
@@ -32,6 +39,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,29 +55,102 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 	
 	// temp XMPP task
+	ConnectionConfiguration config;
+	XMPPConnection myXMPPConnection;
+	private ArrayList<String> messages = new ArrayList<String>();
+	private ListView listview;
+	private Handler mHandler = new Handler();
 	private class ConnectToXmpp extends AsyncTask<Void, Void, Void> {
-	    @Override
+		@Override
 	    protected Void doInBackground(Void... params) {
-	          ConnectionConfiguration config = new ConnectionConfiguration( "localhost", 0); // server address and port
-	          XMPPTCPConnection m_connection = new XMPPTCPConnection(config);
+	          config = new ConnectionConfiguration( "candyhouse.co", 5223); // server address and port
+	          myXMPPConnection = new XMPPConnection(config);
 	    try {
-	         SASLAuthentication.supportSASLMechanism("PLAIN");
-	         config.setSecurityMode(ConnectionConfiguration.SecurityMode.enabled);     
-	         m_connection.connect();
-	        Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.manual);
+	    	 //SASLAuthentication.registerSASLMechanism(0, "PLAIN", mClass);
+	         config.setSASLAuthenticationEnabled(true);  
+	         myXMPPConnection.connect();
+	         
+	         String conn_id = myXMPPConnection.getConnectionID();
+	         txtXMPPStatus.setText(conn_id);
+	        
+	         //
+	         Presence myPresence = new Presence(Presence.Type.available);
+	         myXMPPConnection.sendPacket(myPresence);
+	         
+	         //
+	         Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.manual);
+	         Roster roster = myXMPPConnection.getRoster();
+	         Collection<RosterEntry> entries = roster.getEntries();
+	         for (RosterEntry entry : entries) {
+	              Log.d("XMPPChatDemoActivity",  "============");
+	              Log.d("XMPPChatDemoActivity", "RosterEntry " + entry);
+	              Log.d("XMPPChatDemoActivity", "User: " + entry.getUser());
+	              Log.d("XMPPChatDemoActivity", "Name: " + entry.getName());
+	              Log.d("XMPPChatDemoActivity", "Status: " + entry.getStatus());
+	              Log.d("XMPPChatDemoActivity", "Type: " + entry.getType());
+	              Presence entryPresence = roster.getPresence(entry.getUser());
+
+	              Log.d("XMPPChatDemoActivity", "Presence Status: "+ entryPresence.getStatus());
+	              Log.d("XMPPChatDemoActivity", "Presence Type: " + entryPresence.getType());
+
+	              Presence.Type type = entryPresence.getType();
+	              if (type == Presence.Type.available){
+	                Log.d("XMPPChatDemoActivity", "Presence AVIALABLE");
+	                Log.d("XMPPChatDemoActivity", "Presence : " + entryPresence);
+	              }
+	              // dialog.dismiss();
+	           }
 	    } catch (Exception e) {
 	        e.printStackTrace();
+	        setConnection(null);
 	    } 
-
 	        return null;
-	    }
-
-	    @Override
-	    protected void onPostExecute(Void result) {
-
-	    }
-
+	    };
 	}
+	
+	public void setConnection(XMPPConnection connection) {
+	    // this.connection = connection;
+	    if (connection != null) {
+	      // Add a packet listener to get messages sent to us
+	      PacketFilter filter = new MessageTypeFilter(Message.Type.chat);
+	      connection.addPacketListener(new PacketListener() {
+	        
+
+			@Override
+			public void processPacket(Packet packet) {
+				// TODO Auto-generated method stub
+				Message message = (Message) packet;
+		          if (message.getBody() != null) {
+		            String fromName = StringUtils.parseBareAddress(message.getFrom());
+		            Log.i("XMPPChatDemoActivity ", " Text Recieved " + message.getBody() + " from " +  fromName);
+		            messages.add(fromName + ":");
+		            messages.add(message.getBody());
+		            // Add the incoming message to the list view
+		            mHandler.post(new Runnable() {
+		              public void run() {
+		                setListAdapter();
+		              }
+		            });
+		          }
+			}
+	      }, filter);
+	    }
+	  }
+	
+	private void setListAdapter() {
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.listitem, messages);
+	    listview.setAdapter(adapter);
+	  }
+	
+	OnClickListener clickListenerConnectXMPP = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			Toast.makeText(getApplicationContext(), "start to connect xmpp service...", Toast.LENGTH_LONG).show();
+			new ConnectToXmpp().execute();
+		}
+	};
 	
 	// inner variables of Bluetooth
 	private static final int REQUEST_ENABLE_BT = 0x1;
@@ -216,6 +297,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        // XMPP
+        initXMMPCOmponents();
 
         // view initialization
         initGCMXMLComponents();
@@ -295,8 +378,16 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
+		
+		// xmpp connection
+		if (myXMPPConnection.isConnected()){
+			myXMPPConnection.disconnect();
+		}
+		
 		//bluetooth
-		myBluetoothAdapter.disable();
+		if (myBluetoothAdapter.isEnabled()){
+			myBluetoothAdapter.disable();
+		}
 		
 		//GCM
 		GCMRegistrar.onDestroy(this);
@@ -415,6 +506,15 @@ public class MainActivity extends Activity {
 	
     
 	/* XML Components */
+	
+	//XMPP
+	private Button btnConnectXMPP;
+	private TextView txtXMPPStatus;
+	private void initXMMPCOmponents(){
+		btnConnectXMPP = (Button) findViewById(R.id.btnConnectXMPP);
+		btnConnectXMPP.setOnClickListener(clickListenerConnectXMPP);
+		txtXMPPStatus = (TextView) findViewById(R.id.txtXMPPStatus);
+	}
 	
 	//Bluetooth
 	private Button btnOn;

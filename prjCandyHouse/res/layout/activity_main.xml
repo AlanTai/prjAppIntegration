@@ -5,6 +5,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <Button 
+        android:id="@+id/btnConnectXMPP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/btnConnectXMPP"/>
+    <TextView 
+        android:id="@+id/txtXMPPStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/txtXMPPStatus"/>
+    
+    <TextView 
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="#000"
+        android:padding="2dp"/>
+    
     <TextView
         android:id="@+id/tvRegStatus"
         android:layout_width="match_parent"
