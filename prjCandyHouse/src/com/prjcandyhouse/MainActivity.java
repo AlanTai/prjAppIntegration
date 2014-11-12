@@ -20,7 +20,6 @@ import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.filter.MessageTypeFilter;
 import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.packet.Message;
@@ -73,11 +72,21 @@ public class MainActivity extends Activity {
 	         String conn_id = myXMPPConnection.getConnectionID();
 	         txtXMPPStatus.setText(conn_id);
 	        
-	         //
+	         // Presence
 	         Presence myPresence = new Presence(Presence.Type.available);
 	         myXMPPConnection.sendPacket(myPresence);
 	         
-	         //
+	         String strMessage = "Hello from Alan Tai";
+	         Message myMsg = new Message("Alan Tai", Message.Type.chat);
+	         myMsg.setBody(strMessage);
+	         if (myXMPPConnection != null) {
+	        	 myXMPPConnection.sendPacket(myMsg);
+	             messages.add(myXMPPConnection.getUser() + ":");
+	             messages.add(strMessage);
+	             setListAdapter();
+	         }
+	         
+	         // Roster
 	         Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.manual);
 	         Roster roster = myXMPPConnection.getRoster();
 	         Collection<RosterEntry> entries = roster.getEntries();
@@ -114,7 +123,6 @@ public class MainActivity extends Activity {
 	      // Add a packet listener to get messages sent to us
 	      PacketFilter filter = new MessageTypeFilter(Message.Type.chat);
 	      connection.addPacketListener(new PacketListener() {
-	        
 
 			@Override
 			public void processPacket(Packet packet) {
@@ -149,6 +157,18 @@ public class MainActivity extends Activity {
 			// TODO Auto-generated method stub
 			Toast.makeText(getApplicationContext(), "start to connect xmpp service...", Toast.LENGTH_LONG).show();
 			new ConnectToXmpp().execute();
+		}
+	};
+	
+	OnClickListener clickListenerDisconnectXMPP = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			if(myXMPPConnection.isConnected()){
+				Toast.makeText(getApplicationContext(), "XMPP will be disconnected...", Toast.LENGTH_LONG).show();
+				myXMPPConnection.disconnect();
+			}
 		}
 	};
 	
@@ -509,10 +529,14 @@ public class MainActivity extends Activity {
 	
 	//XMPP
 	private Button btnConnectXMPP;
+	private Button btnDisconnectXMPP;
 	private TextView txtXMPPStatus;
 	private void initXMMPCOmponents(){
 		btnConnectXMPP = (Button) findViewById(R.id.btnConnectXMPP);
 		btnConnectXMPP.setOnClickListener(clickListenerConnectXMPP);
+		
+		btnDisconnectXMPP = (Button) findViewById(R.id.btnDisconnectXMPP);
+		btnDisconnectXMPP.setOnClickListener(clickListenerDisconnectXMPP);
 		txtXMPPStatus = (TextView) findViewById(R.id.txtXMPPStatus);
 	}
 	
