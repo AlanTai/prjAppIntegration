@@ -260,11 +260,7 @@ public class MainActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "Log in as allen wang", Toast.LENGTH_LONG).show();
 					super.onPostExecute(result);
 				}
-				
-				
-			
 			}.execute(null, null, null);
-			
 		}
 	};
 

@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/7849/trunk/talk/examples/android/src/org/appspot/apprtc
+END
+UnhandledExceptionHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/4914/trunk/talk/examples/android/src/org/appspot/apprtc/UnhandledExceptionHandler.java
+END
+RoomParametersFetcher.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/7813/trunk/talk/examples/android/src/org/appspot/apprtc/RoomParametersFetcher.java
+END
+SettingsFragment.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/7534/trunk/talk/examples/android/src/org/appspot/apprtc/SettingsFragment.java
+END
+GAERTCClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/7813/trunk/talk/examples/android/src/org/appspot/apprtc/GAERTCClient.java
+END
+GAEChannelClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/7718/trunk/talk/examples/android/src/org/appspot/apprtc/GAEChannelClient.java
+END
+AppRTCAudioManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/7849/trunk/talk/examples/android/src/org/appspot/apprtc/AppRTCAudioManager.java
+END
+ConnectActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/7813/trunk/talk/examples/android/src/org/appspot/apprtc/ConnectActivity.java
+END
+AppRTCClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/7813/trunk/talk/examples/android/src/org/appspot/apprtc/AppRTCClient.java
+END
+PeerConnectionClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/7836/trunk/talk/examples/android/src/org/appspot/apprtc/PeerConnectionClient.java
+END
+AppRTCDemoActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/7836/trunk/talk/examples/android/src/org/appspot/apprtc/AppRTCDemoActivity.java
+END
+SettingsActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/7813/trunk/talk/examples/android/src/org/appspot/apprtc/SettingsActivity.java
+END
+WebSocketChannelClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/7836/trunk/talk/examples/android/src/org/appspot/apprtc/WebSocketChannelClient.java
+END
+WebSocketRTCClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/7820/trunk/talk/examples/android/src/org/appspot/apprtc/WebSocketRTCClient.java
+END

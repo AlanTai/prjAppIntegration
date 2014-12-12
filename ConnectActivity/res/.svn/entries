@@ -1,0 +1,55 @@
+10
+
+dir
+7885
+http://webrtc.googlecode.com/svn/trunk/talk/examples/android/res
+http://webrtc.googlecode.com/svn
+
+
+
+2014-12-04T17:28:52.574520Z
+7813
+glaznev@webrtc.org
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4adac7df-926f-26a2-2b94-8c16560cd09d
+
+values
+dir
+
+xml
+dir
+
+drawable-hdpi
+dir
+
+menu
+dir
+
+values-v21
+dir
+
+drawable-ldpi
+dir
+
+drawable-mdpi
+dir
+
+drawable-xhdpi
+dir
+
+layout
+dir
+
