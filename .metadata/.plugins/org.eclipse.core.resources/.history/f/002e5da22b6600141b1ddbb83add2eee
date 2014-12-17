@@ -1,7 +1,0 @@
-package com.prjcandyhouse;
-
-import com.google.android.gcm.GCMBaseIntentService;
-
-public class GCMIntentService extends GCMBaseIntentService{
-
-}

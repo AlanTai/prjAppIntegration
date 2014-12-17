@@ -1,7 +1,0 @@
-package com.prjcandyhouse;
-
-import android.content.BroadcastReceiver;
-
-public class AutoStartNotifyReceiver extends BroadcastReceiver{
-
-}
