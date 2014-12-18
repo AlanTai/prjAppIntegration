@@ -8,5 +8,6 @@
     <string name="txtSpace"></string>
     <string name="txtFirstNumber"></string>
     <string name="txtSecondNumber"></string>
+    <string name="txtMultiply">Multuply</string>
 
 </resources>
