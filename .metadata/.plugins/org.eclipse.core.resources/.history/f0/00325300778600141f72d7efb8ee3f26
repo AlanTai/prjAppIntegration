@@ -1,0 +1,33 @@
+package com.prjcandyhouse;
+
+public class Contact {
+	private String firstName, lastName;
+
+	public Contact(){
+
+	}
+
+	public Contact(String argFirstName, String argLastName){
+		firstName = argFirstName;
+		lastName = argLastName;
+
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	
+}

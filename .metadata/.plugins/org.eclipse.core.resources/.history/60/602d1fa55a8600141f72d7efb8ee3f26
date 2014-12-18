@@ -1,0 +1,10 @@
+package com.prjcandyhouse.test;
+
+import android.test.AndroidTestCase;
+import junit.framework.TestCase;
+
+public class XMPPDAOTest extends AndroidTestCase {
+	public void testConstructor(){
+		
+	}
+}

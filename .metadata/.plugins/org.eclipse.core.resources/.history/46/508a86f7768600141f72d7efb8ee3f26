@@ -1,0 +1,16 @@
+package com.prjcandyhouse.test;
+
+import com.prjcandyhouse.Contact;
+
+import android.test.AndroidTestCase;
+
+public class XMPPDAOTest extends TestCase {
+	public void testConstructor(){
+		Contact c = new Contact();
+		assertNotNull(c);
+	}
+	
+	public void testGetter(){
+		
+	}
+}
